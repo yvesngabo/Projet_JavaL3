@@ -1,0 +1,27 @@
+PS C:\Users\YVES\Desktop\JAVA\projet> javac -Xlint:deprecation Main.java LocalPasswordCracker.java BruteForceLocalPasswordCracker.java DictionaryLocalPasswordCracker.java OnlinePasswordCracker.java BruteForceOnlinePasswordCracker.java DictionaryOnlinePasswordCracker.java
+PS C:\Users\YVES\Desktop\JAVA\projet> java Main                                                              
+Mot de passe local trouvé: password1                                                                         
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+        at java.base/jdk.internal.misc.Unsafe.allocateUninitializedArray(Unsafe.java:1380)
+        at java.base/java.lang.StringConcatHelper.newArray(StringConcatHelper.java:509)
+        at java.base/java.lang.StringConcatHelper.simpleConcat(StringConcatHelper.java:433)
+        at java.base/java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(DirectMethodHandle$Holder)      
+        at java.base/java.lang.invoke.DelegatingMethodHandle$Holder.reinvoke_L(DelegatingMethodHandle$Holder)
+        at java.base/java.lang.invoke.Invokers$Holder.linkToTargetMethod(Invokers$Holder)
+        at BruteForceOnlinePasswordCracker.generatePassword(BruteForceOnlinePasswordCracker.java:36)
+        at BruteForceOnlinePasswordCracker.crack(BruteForceOnlinePasswordCracker.java:20)
+        at Main.main(Main.java:19)
+PS C:\Users\YVES\Desktop\JAVA\projet> 
+
+
+
+Dans ces résultats, il y a deux problèmes distincts :
+
+1. Erreur d'exécution (java.lang.OutOfMemoryError):
+
+Message: java.lang.OutOfMemoryError: Java heap space
+Signification: Cette erreur se produit lorsque votre programme essaie d'utiliser plus de mémoire que ce qui est alloué au tas Java (Java heap). Le tas Java est une zone de mémoire utilisée pour stocker les objets pendant l'exécution du programme. Dans ce cas précis, il semble que la fonction generatePassword (ligne 36 de BruteForceOnlinePasswordCracker.java) génère trop de combinaisons de mots de passe, ce qui dépasse la capacité de mémoire allouée par défaut.
+2. Avertissement d'obsolescence (résolu précédemment):
+
+Remarque: Vous ne l'avez pas mentionné dans cette sortie, mais on peut supposer que vous avez déjà corrigé l'avertissement d'obsolescence concernant la création d'objets URL en utilisant la classe URI comme indiqué précédemment.
+En résumé, votre programme fonctionne en trouvant un mot de passe local ("password1"), mais il rencontre ensuite une erreur de mémoire insuffisante car il tente de générer trop de combinaisons de mots de passe.
